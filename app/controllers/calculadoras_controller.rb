@@ -24,18 +24,8 @@ class CalculadorasController < ApplicationController
   # POST /calculadoras
   # POST /calculadoras.json
   def create
-    @calculadora = Calculadora.new(calculadora_params)
-
-    respond_to do |format|
-      if @calculadora.save
-        Publisher.publish("posts", "#{@calculadora.num1 + @calculadora.num2}")
-        format.html { redirect_to @calculadora, notice: 'Calculadora was successfully created.' }
-        format.json { render :show, status: :created, location: @calculadora }
-      else
-        format.html { render :new }
-        format.json { render json: @calculadora.errors, status: :unprocessable_entity }
-      end
-    end
+    @calculadora = Calculadora.create(calculadora_params)
+    Publisher::Sender.publish(@calculadora)
   end
 
   # PATCH/PUT /calculadoras/1
