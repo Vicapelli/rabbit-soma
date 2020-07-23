@@ -1,0 +1,27 @@
+<%= form_with(model: calculadora, local: true) do |form| %>
+  <% if calculadora.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(calculadora.errors.count, "error") %> prohibited this calculadora from being saved:</h2>
+
+      <ul>
+        <% calculadora.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :num1 %>
+    <%= form.number_field :num1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :num2 %>
+    <%= form.number_field :num2 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
