@@ -28,6 +28,7 @@ class CalculadorasController < ApplicationController
 
     respond_to do |format|
       if @calculadora.save
+        Publisher.publish("posts", "#{@calculadora.num1 + @calculadora.num2}")
         format.html { redirect_to @calculadora, notice: 'Calculadora was successfully created.' }
         format.json { render :show, status: :created, location: @calculadora }
       else
