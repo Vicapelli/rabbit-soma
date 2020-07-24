@@ -13,12 +13,14 @@ module Publisher
         ch = conn.create_channel
 
 
-        a = ch.queue("soma")
-        b = ch.queue("soma")
+        q = ch.queue("soma")
 
-        a.publish(params.num1.to_s)
-        b.publish(params.num2.to_s)
+        body = {
+          first_number: params.num1.to_i,
+          second_number: params.num2.to_i
+        }
 
+        q.publish(body.to_json)
 
         conn.stop
     end
