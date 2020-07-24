@@ -26,6 +26,7 @@ class CalculadorasController < ApplicationController
   def create
     @calculadora = Calculadora.create(calculadora_params)
     Publisher::Sender.publish(@calculadora)
+    redirect_to calculadoras_path
   end
 
   # PATCH/PUT /calculadoras/1
